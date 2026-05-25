@@ -23,6 +23,7 @@ interface WindowStore {
   closeWindow: (id: WindowId) => void;
   minimizeWindow: (id: WindowId) => void;
   focusWindow: (id: WindowId) => void;
+  setWindowPosition: (id: WindowId, position: { x: number; y: number }) => void;
   getWindow: (id: WindowId) => WindowState | undefined;
   applyDesktopLayout: () => void;
 }
@@ -156,6 +157,13 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
       ),
     }));
   },
+
+  setWindowPosition: (id, position) =>
+    set((state) => ({
+      windows: state.windows.map((w) =>
+        w.id === id ? { ...w, position } : w
+      ),
+    })),
 
   getWindow: (id) => get().windows.find((w) => w.id === id),
 

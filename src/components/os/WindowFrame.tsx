@@ -44,10 +44,14 @@ export default function WindowFrame({
   height = 420,
 }: WindowFrameProps) {
   const win = useWindowStore((s) => s.windows.find((w) => w.id === id));
+  const storeX = win?.position.x;
+  const storeY = win?.position.y;
+  const isOpen = win?.isOpen ?? false;
   const windows = useWindowStore((s) => s.windows);
   const closeWindow = useWindowStore((s) => s.closeWindow);
   const minimizeWindow = useWindowStore((s) => s.minimizeWindow);
   const focusWindow = useWindowStore((s) => s.focusWindow);
+  const setWindowPosition = useWindowStore((s) => s.setWindowPosition);
   const isMobile = useIsMobile();
 
   const [size, setSize] = useState({ width, height });
@@ -57,21 +61,29 @@ export default function WindowFrame({
   const [prevPos, setPrevPos] = useState({ x: 80, y: 60 });
 
   useEffect(() => {
-    if (!win) return;
+    if (storeX === undefined || storeY === undefined) return;
+
+    const position = { x: storeX, y: storeY };
+    startTransition(() => {
+      setPos(position);
+      setPrevPos(position);
+    });
+  }, [storeX, storeY]);
+
+  useEffect(() => {
+    if (id !== "about" || !isOpen) return;
+    if (storeX !== 80 || storeY !== 60) return;
+
+    const centerX = Math.max(0, (window.innerWidth - size.width) / 2);
+    const centerY = Math.max(0, (window.innerHeight - size.height) / 2);
+    const centered = { x: centerX, y: centerY };
 
     startTransition(() => {
-      if (id === "about" && win.position.x === 80 && win.position.y === 60) {
-        const centerX = Math.max(0, (window.innerWidth - size.width) / 2);
-        const centerY = Math.max(0, (window.innerHeight - size.height) / 2);
-        setPos({ x: centerX, y: centerY });
-        setPrevPos({ x: centerX, y: centerY });
-        return;
-      }
-
-      setPos(win.position);
-      setPrevPos(win.position);
+      setPos(centered);
+      setPrevPos(centered);
+      setWindowPosition("about", centered);
     });
-  }, [id, win, size.width, size.height]);
+  }, [id, isOpen, storeX, storeY, size.width, size.height, setWindowPosition]);
 
   if (!win || !win.isOpen) return null;
 
@@ -104,9 +116,13 @@ export default function WindowFrame({
       if (isMaximized) setIsMaximized(false);
     };
 
-    const handlePointerUp = () => {
+    const handlePointerUp = (upEvent: PointerEvent) => {
       document.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("pointerup", handlePointerUp);
+
+      const nextY = Math.max(0, startPosY + (upEvent.clientY - startY));
+      const nextX = startPosX + (upEvent.clientX - startX);
+      setWindowPosition(id, { x: nextX, y: nextY });
     };
 
     document.addEventListener("pointermove", handlePointerMove);
@@ -160,9 +176,29 @@ export default function WindowFrame({
       if (isMaximized) setIsMaximized(false);
     };
 
-    const handlePointerUp = () => {
+    const handlePointerUp = (upEvent: PointerEvent) => {
       document.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("pointerup", handlePointerUp);
+
+      const dx = upEvent.clientX - startX;
+      const dy = upEvent.clientY - startY;
+      let newX = startPosX;
+      let newY = startPosY;
+
+      if (dir.includes("w")) {
+        const potentialWidth = startWidth - dx;
+        if (potentialWidth >= minWidth) {
+          newX = startPosX + dx;
+        }
+      }
+      if (dir.includes("n")) {
+        const potentialHeight = startHeight - dy;
+        if (potentialHeight >= minHeight) {
+          newY = Math.max(0, startPosY + dy);
+        }
+      }
+
+      setWindowPosition(id, { x: newX, y: newY });
     };
 
     document.addEventListener("pointermove", handlePointerMove);
@@ -173,14 +209,17 @@ export default function WindowFrame({
     if (isMaximized) {
       setSize(prevSize);
       setPos(prevPos);
+      setWindowPosition(id, prevPos);
       setIsMaximized(false);
     } else {
       setPrevSize(size);
       setPrevPos(pos);
       const newW = window.innerWidth - 20;
       const newH = window.innerHeight - 60;
+      const maximizedPos = { x: 10, y: 10 };
       setSize({ width: newW, height: newH });
-      setPos({ x: 10, y: 10 });
+      setPos(maximizedPos);
+      setWindowPosition(id, maximizedPos);
       setIsMaximized(true);
     }
   };
