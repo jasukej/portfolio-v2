@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-canvas: var(--theme-canvas);
+  --color-navy: var(--theme-navy);
+  --color-navy-light: var(--theme-navy-light);
+  --color-cream: var(--theme-cream);
+  --color-accent: var(--theme-accent);
+  --color-terminal: var(--theme-terminal);
+
+  --font-sans: var(--font-chicago), "Chicago", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-mono), "IBM Plex Mono", ui-monospace, monospace;
+}
+
+:root {
+  --theme-canvas: #f5f5f5;
+  --theme-navy: #111111;
+  --theme-navy-light: #c0c0c0;
+  --theme-cream: #e0e0e0;
+  --theme-accent: #ff0044;
+  --theme-terminal: #111111;
+  --icon-invert: invert(0);
+}
+
+.dark {
+  --theme-canvas: #0a0a0c;
+  --theme-navy: #e5e7eb;
+  --theme-navy-light: #333333; 
+  --theme-cream: #111111;
+  --theme-accent: #ffffff;
+  --theme-terminal: #4af626;
+  --icon-invert: invert(0.9) drop-shadow(0px 0px 3px rgba(229,231,235,0.6)); 
+}
+
+* {
+  cursor: default;
+}
+
+a, button, [role="button"], input, select, textarea, label {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--color-navy);
+  color: var(--color-canvas);
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-scanline {
+  animation: scanline 8s linear infinite;
+}
