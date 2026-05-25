@@ -66,7 +66,7 @@ export default function ExperiencesContent() {
 
       <div className="flex-1 overflow-y-auto pr-2 pb-4">
         <div className="mb-5 font-mono text-[10px] text-navy/50">
-          Showing {filteredResults.length} results for "{searchQuery || activeTab}"
+          Showing {filteredResults.length} results for &ldquo;{searchQuery || activeTab}&rdquo;
         </div>
         
         <div className="flex flex-col gap-7">

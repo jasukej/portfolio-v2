@@ -1,6 +1,12 @@
 "use client";
 
-import { type ReactNode, useRef, useEffect, useState } from "react";
+import {
+  type ReactNode,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  startTransition,
+} from "react";
 import { motion } from "framer-motion";
 import { useWindowStore, type WindowId } from "@/store/useWindowStore";
 
@@ -11,16 +17,24 @@ interface WindowFrameProps {
   height?: number;
 }
 
+const MOBILE_QUERY = "(max-width: 639px)";
+
+function subscribeMobileQuery(onChange: () => void) {
+  const mq = window.matchMedia(MOBILE_QUERY);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+function getMobileSnapshot() {
+  return window.matchMedia(MOBILE_QUERY).matches;
+}
+
 function useIsMobile() {
-  const [mobile, setMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 639px)");
-    setMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return mobile;
+  return useSyncExternalStore(
+    subscribeMobileQuery,
+    getMobileSnapshot,
+    () => false
+  );
 }
 
 export default function WindowFrame({
@@ -30,6 +44,7 @@ export default function WindowFrame({
   height = 420,
 }: WindowFrameProps) {
   const win = useWindowStore((s) => s.windows.find((w) => w.id === id));
+  const windows = useWindowStore((s) => s.windows);
   const closeWindow = useWindowStore((s) => s.closeWindow);
   const minimizeWindow = useWindowStore((s) => s.minimizeWindow);
   const focusWindow = useWindowStore((s) => s.focusWindow);
@@ -44,21 +59,22 @@ export default function WindowFrame({
   useEffect(() => {
     if (!win) return;
 
-    if (id === "about" && win.position.x === 80 && win.position.y === 60) {
-      const centerX = Math.max(0, (window.innerWidth - size.width) / 2);
-      const centerY = Math.max(0, (window.innerHeight - size.height) / 2);
-      setPos({ x: centerX, y: centerY });
-      setPrevPos({ x: centerX, y: centerY });
-      return;
-    }
+    startTransition(() => {
+      if (id === "about" && win.position.x === 80 && win.position.y === 60) {
+        const centerX = Math.max(0, (window.innerWidth - size.width) / 2);
+        const centerY = Math.max(0, (window.innerHeight - size.height) / 2);
+        setPos({ x: centerX, y: centerY });
+        setPrevPos({ x: centerX, y: centerY });
+        return;
+      }
 
-    setPos(win.position);
-    setPrevPos(win.position);
-  }, [id, win?.position.x, win?.position.y]);
+      setPos(win.position);
+      setPrevPos(win.position);
+    });
+  }, [id, win, size.width, size.height]);
 
   if (!win || !win.isOpen) return null;
 
-  const windows = useWindowStore((s) => s.windows);
   const openWindows = windows.filter((w) => w.isOpen && !w.isMinimized);
   const isFocused =
     openWindows.length > 0 &&

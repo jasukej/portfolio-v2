@@ -49,11 +49,11 @@ export const ABOUT = {
     {
       type: "rich",
       parts: [
-        { text: "Currently, I'm " },
-        { window: { windowId: "experiences", label: "in NYC for the summer" } },
+        { text: "I'm currently in NYC for the summer working on " },
+        { window: { windowId: "experiences", label: "Rust-C++ interop" } },
         { text: ". I enjoy " },
         { window: { windowId: "blog", label: "writing" } },
-        { text: ", both introspectively and technically." },
+        { text: ", whether that be technical deep-dives or reflections." },
       ],
     },
   ] satisfies AboutParagraph[],
