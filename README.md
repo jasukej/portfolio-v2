@@ -26,5 +26,5 @@ npm run lint:fix   # ESLint with auto-fix
 ```
 
 ## Acknowledgements
-* Awesome design kit by (Brett Anderson)[https://www.figma.com/@brettanderson]: https://www.figma.com/community/file/907684770824957775
+* Awesome design kit by [Brett Anderson](https://www.figma.com/@brettanderson): https://www.figma.com/community/file/907684770824957775
 * Pixel icons from: https://www.streamlinehq.com/icons/pixel

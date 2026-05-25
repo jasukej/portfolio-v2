@@ -17,7 +17,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: "Roselina Kezia Rijadi",
-  description: "Analog Desktop — Personal Portfolio",
+  description: "Portfolio - Updated May 2026",
 };
 
 export const viewport: Viewport = {
