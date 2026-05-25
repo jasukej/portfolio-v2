@@ -1,0 +1,37 @@
+[
+  {
+    "name": "lsvg",
+    "description": "lindenberg system generator written in haskell",
+    "tags": [],
+    "year": "2026",
+    "url": "https://github.com/jasukej/lsvg"
+  },
+  {
+    "name": "parlox",
+    "description": "lox variant from crafting interpreters with generational gc for parallel execution",
+    "tags": [],
+    "year": "2026",
+    "url": "https://github.com/jasukej/binterpreter"
+  },
+  {
+    "name": "bagel",
+    "description": "lightweight, parallelizable build system written in rust",
+    "tags": [],
+    "year": "2025",
+    "url": "https://github.com/jasukej/bagel"
+  },
+  {
+    "name": "study spotter",
+    "description": "website to search for study spots (primarily in vancouver)",
+    "tags": [],
+    "year": "2024",
+    "url": "https://github.com/jasukej/study-spotter"
+  },
+  {
+    "name": "jalankami",
+    "description": "cv-based urban planning tool to source and visualize gaps in local infrastructure",
+    "tags": [],
+    "year": "2024",
+    "url": "https://github.com/jasukej/garudahacks"
+  }
+]

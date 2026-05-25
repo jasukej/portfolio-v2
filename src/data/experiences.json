@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Software Engineer Intern",
+    "org": "Google",
+    "team": "Crubit (Rust-C++ Interop)",
+    "link": "https://buildyourfuture.withgoogle.com/",
+    "tag": "work",
+    "location": "New York City, NY",
+    "description": "Making it possible to ergonomically call C++ code from Rust and vice versa by building tools and libraries for the Crubit project.",
+    "date": "Jan 2026 - Present"
+  },
+  {
+    "title": "Software Engineer Intern",
+    "org": "Tesla",
+    "team": "Energy",
+    "link": "https://www.tesla.com/en_ca/supercharger",
+    "tag": "work",
+    "location": "Palo Alto, CA",
+    "description": "Building distributed services in Scala and Akka to optimize uptime of a global charging network.",
+    "date": "Sept 2025 - Dec 2025"
+  },
+  {
+    "title": "Software Developer Intern",
+    "org": "Google",
+    "team": "GCP Healthcare",
+    "link": "https://buildyourfuture.withgoogle.com/",
+    "tag": "work",
+    "location": "Kitchener, ON",
+    "description": "Developed front-end features in Angular and RxJS for GCP Healthcare's suite of products. Implemented resource creation and rollback interfaces to prevent data corruption in medical datastores.",
+    "date": "May 2025 - Aug 2025"
+  },
+  {
+    "title": "Software Engineer Intern",
+    "org": "Kawan Lama Group",
+    "link": "https://www.linkedin.com/company/kawan-lama-group/",
+    "tag": "work",
+    "location": "Jakarta, Indonesia",
+    "description": "Built an internal incident management system using Ruby on Rails to manage the company's IT workflow, saving 8 hours of manual incident reporting per week.",
+    "date": "Sep 2024 - Dec 2024"
+  },
+  {
+    "title": "Support Analyst",
+    "org": "UBC Advanced Research Computing",
+    "link": "https://arc.ubc.ca/",
+    "tag": "part-time",
+    "location": "Vancouver, BC",
+    "description": "Troubleshooting and supporting UBC's research platforms (REDCap) and high-performance computing cluster, managing 200+ researchers and 300+ jobs.",
+    "date": "Sep 2024 - Present"
+  },
+  {
+    "title": "Teaching Assistant",
+    "org": "The University of British Columbia",
+    "link": "https://www.cs.ubc.ca/",
+    "tag": "part-time",
+    "location": "Vancouver, BC",
+    "description": "Teaching assistant for UBC's CPSC 210 - Software Construction course. Reinforcing Java and OOP concepts through weekly office hours and facilitating labs for 80+ students.",
+    "date": "Sep 2024 - Dec 2024"
+  },
+  {
+    "title": "VP Community",
+    "org": "UBC Product Management Club",
+    "link": "https://ubcpmc.com/",
+    "tag": "organizations",
+    "location": "Vancouver, BC",
+    "description": "Organized Canada's first student-led PM conference! Being really good at KBBQ. Also running UBC's first Product Fellowship. Previously Conference Director (2024-2025).",
+    "date": "May 2024 - Present"
+  },
+  {
+    "title": "Developer",
+    "org": "nwPlus",
+    "link": "https://nwplus.io/",
+    "tag": "organizations",
+    "location": "Vancouver, BC",
+    "description": "Developing software tools for 1000+ hackers and 50+ organizers to run Western Canada's largest hackathons. Previously Engagement Coordinator (2024-2025).",
+    "date": "May 2024 - Present"
+  }
+]
