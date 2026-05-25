@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ABOUT, type AboutParagraph } from "@/data/about";
+import { ABOUT, ABOUT_LINK_CLASS, type AboutParagraph } from "@/data/about";
 import { useWindowStore, type WindowId } from "@/store/useWindowStore";
 
 export default function AboutContent() {
@@ -14,17 +14,21 @@ export default function AboutContent() {
     focusWindow(id);
   };
 
+  const linkClassName = (cursorClass: string = ABOUT_LINK_CLASS) =>
+    `inline-flex items-baseline border-0 bg-transparent p-0 font-inherit text-inherit font-medium ${cursorClass} decoration-navy/40 underline-offset-4 hover:decoration-navy hover:text-navy hover:underline transition-all duration-200 ease-in-out border-b border-navy/20 hover:border-transparent`;
+
   const Link = ({
     children,
     onClick,
     href,
+    className = ABOUT_LINK_CLASS,
   }: {
     children: React.ReactNode;
     onClick?: () => void;
     href?: string;
+    className?: string;
   }) => {
-    const className =
-      "inline-flex items-baseline font-medium cursor-pointer decoration-navy/40 underline-offset-4 hover:decoration-navy hover:text-navy hover:underline transition-all duration-200 ease-in-out border-b border-navy/20 hover:border-transparent";
+    const classes = linkClassName(className);
 
     if (href) {
       return (
@@ -32,7 +36,7 @@ export default function AboutContent() {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className={className}
+          className={classes}
         >
           {children}
         </a>
@@ -40,9 +44,9 @@ export default function AboutContent() {
     }
 
     return (
-      <span onClick={onClick} className={className}>
+      <button type="button" onClick={onClick} className={classes}>
         {children}
-      </span>
+      </button>
     );
   };
 
@@ -59,13 +63,21 @@ export default function AboutContent() {
           }
           if ("external" in part) {
             return (
-              <Link key={i} href={part.external.href}>
+              <Link
+                key={i}
+                href={part.external.href}
+                className={part.external.className}
+              >
                 {part.external.label}
               </Link>
             );
           }
           return (
-            <Link key={i} onClick={() => handleOpen(part.window.windowId)}>
+            <Link
+              key={i}
+              className={part.window.className}
+              onClick={() => handleOpen(part.window.windowId)}
+            >
               {part.window.label}
             </Link>
           );
