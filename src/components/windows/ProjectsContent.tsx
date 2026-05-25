@@ -50,11 +50,10 @@ export default function ProjectsContent() {
               return (
                 <div key={project.name} className="mt-0.5">
                   <div
-                    className={`flex items-center gap-1.5 py-1 px-1 cursor-pointer transition-colors ${
-                      isSelected && !isOpen
+                    className={`flex items-center gap-1.5 py-1 px-1 cursor-pointer transition-colors ${isSelected && !isOpen
                         ? "bg-navy text-canvas font-bold"
                         : "hover:bg-navy/10 text-navy"
-                    }`}
+                      }`}
                     onClick={(e) => toggleFolder(project.name, e)}
                   >
                     {isOpen ? (
@@ -73,11 +72,10 @@ export default function ProjectsContent() {
                   {isOpen && (
                     <div className="pl-5 space-y-0.5 py-0.5">
                       <div
-                        className={`flex items-center gap-1.5 py-1 px-1 cursor-pointer transition-colors ${
-                          isSelected
+                        className={`flex items-center gap-1.5 py-1 px-1 cursor-pointer transition-colors ${isSelected
                             ? "bg-navy text-canvas font-bold"
                             : "hover:bg-navy/10 text-navy"
-                        }`}
+                          }`}
                         onClick={() => selectProject(project)}
                       >
                         <FileText size={14} className="shrink-0" />

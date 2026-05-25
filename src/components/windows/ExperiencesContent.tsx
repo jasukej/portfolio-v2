@@ -29,7 +29,7 @@ export default function ExperiencesContent() {
           {EXPERIENCES_UI.titleMain}
           <span className="opacity-70">{EXPERIENCES_UI.titleAccent}</span>
         </h1>
-        
+
         <div className="flex w-full max-w-md gap-2">
           <div className="flex flex-1 items-center border-2 border-navy border-b-4 border-r-4 bg-canvas px-2">
             <Search size={14} className="text-navy/50" />
@@ -52,11 +52,10 @@ export default function ExperiencesContent() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-1 ${
-                activeTab === tab
+              className={`pb-1 ${activeTab === tab
                   ? "border-b-2 border-navy text-navy"
                   : "border-b-2 border-transparent text-navy/40 hover:text-navy"
-              }`}
+                }`}
             >
               {tab}
             </button>
@@ -68,7 +67,7 @@ export default function ExperiencesContent() {
         <div className="mb-5 font-mono text-[10px] text-navy/50">
           Showing {filteredResults.length} results for &ldquo;{searchQuery || activeTab}&rdquo;
         </div>
-        
+
         <div className="flex flex-col gap-7">
           {filteredResults.map((exp, idx) => (
             <div key={idx} className="group max-w-2xl">
@@ -80,7 +79,7 @@ export default function ExperiencesContent() {
               >
                 {exp.title} <span className="font-normal opacity-70">@ {exp.org}</span>
               </a>
-              
+
               <div className="mt-1 flex flex-wrap gap-x-2 gap-y-1 text-[10px] font-mono opacity-70">
                 <span>{exp.date}</span>
                 <span className="opacity-30">•</span>
@@ -92,7 +91,7 @@ export default function ExperiencesContent() {
                   </>
                 )}
               </div>
-              
+
               <p className="mt-2 text-[12px] leading-relaxed opacity-90 sm:w-11/12">
                 {exp.description}
               </p>
