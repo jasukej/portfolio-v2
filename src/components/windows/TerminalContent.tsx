@@ -6,6 +6,7 @@ import {
   buildTerminalFileSystem,
   type TerminalFileSystemNode,
 } from "@/data/terminal";
+import { useWindowStore } from "@/store/useWindowStore";
 
 const FILE_SYSTEM = buildTerminalFileSystem();
 
@@ -51,11 +52,15 @@ const getDir = (path: string): TerminalFileSystemNode | null => {
 };
 
 export default function TerminalContent() {
+  const theme = useWindowStore((s) => s.theme);
   const [history, setHistory] = useState<string[]>([...TERMINAL_WELCOME]);
   const [input, setInput] = useState("");
   const [cwd, setCwd] = useState("/home/guest");
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const terminalGlow =
+    theme === "dark" ? "drop-shadow-[0_0_4px_rgba(74,246,38,0.4)]" : "";
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -192,7 +197,7 @@ export default function TerminalContent() {
         {history.map((line, i) => (
           <div
             key={i}
-            className="whitespace-pre-wrap text-terminal/90 dark:drop-shadow-[0_0_4px_rgba(74,246,38,0.4)]"
+            className={`whitespace-pre-wrap text-terminal/90 ${terminalGlow}`}
           >
             {line || "\u00A0"}
           </div>
@@ -201,7 +206,7 @@ export default function TerminalContent() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex items-center gap-2 mt-1 shrink-0">
-        <span className="text-terminal font-bold dark:drop-shadow-[0_0_4px_rgba(74,246,38,0.4)]">
+        <span className={`text-terminal font-bold ${terminalGlow}`}>
           guest@portfoliOS:
           {cwd.startsWith("/home/guest") ? cwd.replace("/home/guest", "~") : cwd}$
         </span>
@@ -209,7 +214,7 @@ export default function TerminalContent() {
           ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 bg-transparent text-terminal outline-none placeholder:text-terminal/30 dark:drop-shadow-[0_0_4px_rgba(74,246,38,0.4)]"
+          className={`flex-1 bg-transparent text-terminal outline-none placeholder:text-terminal/30 ${terminalGlow}`}
           autoFocus
           spellCheck={false}
         />
