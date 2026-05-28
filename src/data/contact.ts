@@ -14,19 +14,19 @@ export const CONTACT = {
     {
       label: "Email",
       value: "roselinakeziarijadi@gmail.com",
-      href: "mailto:hello@roselina.dev",
+      href: "mailto:roselinakeziarijadi@gmail.com",
       icon: "mail",
     },
     {
       label: "GitHub",
       value: "github.com/jasukej",
-      href: "https://github.com/roselina",
+      href: "https://github.com/jasukej",
       icon: "github",
     },
     {
       label: "LinkedIn",
       value: "linkedin.com/in/krijadi",
-      href: "https://linkedin.com/in/roselina",
+      href: "https://linkedin.com/in/krijadi",
       icon: "linkedin",
     },
   ] satisfies ContactLink[],
