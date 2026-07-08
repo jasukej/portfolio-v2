@@ -27,12 +27,13 @@ export type AboutParagraph =
 export const ABOUT = {
   name: "Kez",
   fullName: "Roselina Kezia Rijadi",
-  tagline: "Software Engineer",
+  tagline: "Software Engineer & CS @ University of British Columbia",
   currentlyDoing: ["Learning guitar", "Running", "Writing"],
   links: {
     github: "https://github.com/jasukej",
     ubc: "https://www.ubc.ca/",
     writing: "/blog",
+    linkedin: "https://linkedin.com/in/krijadi",
   },
   paragraphs: [
     {

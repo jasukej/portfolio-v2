@@ -4,7 +4,7 @@ export const WINDOW_DIMENSIONS: Record<
   WindowId,
   { width: number; height: number }
 > = {
-  about: { width: 700, height: 440 },
+  about: { width: 735, height: 440 },
   projects: { width: 600, height: 450 },
   blog: { width: 540, height: 420 },
   experiences: { width: 520, height: 420 },

@@ -1,0 +1,71 @@
+/**
+ * Retro cursors from /public/cursor/
+ */
+:root {
+  --cursor-default: url("/cursor/arrow.cur"), default;
+  --cursor-pointer: url("/cursor/Link%20Select.cur"), pointer;
+  --cursor-text: url("/cursor/text.cur"), text;
+  --cursor-move: url("/cursor/move1.cur"), move;
+  --cursor-move-active: url("/cursor/move2.cur"), move;
+  --cursor-not-allowed: url("/cursor/no.cur"), not-allowed;
+  --cursor-help: url("/cursor/help.cur"), help;
+  --cursor-precision: url("/cursor/precision.cur"), crosshair;
+  --cursor-ew-resize: url("/cursor/Horizontal%20resize.cur"), ew-resize;
+  --cursor-ns-resize: url("/cursor/vert%20resize.cur"), ns-resize;
+}
+
+*,
+*::before,
+*::after {
+  cursor: var(--cursor-default);
+}
+
+a,
+button,
+select,
+[role="button"],
+summary,
+label,
+.cursor-pointer,
+button.cursor-pointer {
+  cursor: var(--cursor-pointer), pointer;
+}
+
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):not(
+    [type="checkbox"]
+  ):not([type="radio"]),
+textarea,
+[contenteditable="true"] {
+  cursor: var(--cursor-text);
+}
+
+:disabled,
+[disabled],
+.cursor-not-allowed {
+  cursor: var(--cursor-not-allowed);
+}
+
+.cursor-grab {
+  cursor: var(--cursor-move), grab;
+}
+
+.cursor-grabbing {
+  cursor: var(--cursor-move-active), grabbing;
+}
+
+.cursor-ns-resize {
+  cursor: var(--cursor-ns-resize), ns-resize;
+}
+
+.cursor-ew-resize {
+  cursor: var(--cursor-ew-resize), ew-resize;
+}
+
+.cursor-nwse-resize,
+.cursor-nesw-resize {
+  cursor: var(--cursor-precision), nwse-resize;
+}
+
+.cursor-help {
+  cursor: var(--cursor-help), help;
+}
