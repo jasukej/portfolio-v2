@@ -6,28 +6,28 @@ import { useWindowStore } from "@/store/useWindowStore";
 
 // TODO(content): Refactor this out
 const BOOT_LINES = [
-  "BIOS v3.2.1 Copyright (C) 2006-2026 Portfolio V2",
-  "Checking memory... 640K OK",
-  "Extended memory... 261120K OK",
+  "Award Modular BIOS v6.00PG",
+  "Copyright (C) 1984-2026, Award Software, Inc.",
+  "",
+  "Main Processor : Generic x86_64 CPU @ 3.2GHz",
+  "Memory Testing : 261120K OK",
   "",
   "Detecting IDE drives...",
-  "  Primary Master: ST-506 HDD 40MB",
-  "  Primary Slave:  None",
+  "  Primary Master : WDC-PFV2 512GB SSD",
+  "  Primary Slave  : None",
   "",
-  "Loading portfoliOS kernel...",
+  "Booting kez-portfolio kernel [6.2.0]...",
   "  Mounting /dev/canvas",
   "  Mounting /dev/loader",
-  "  Initializing window manager...",
-  "  Loading font cache... [Chicago, Geist Mono]",
   "",
-  "Starting services:",
-  "  [OK] portfolio-daemon",
-  "  [OK] clock-service",
-  "  [OK] project-index",
-  "  [OK] contact-relay",
+  "[  OK  ] Mounted /dev/canvas.",
+  "[  OK  ] Reached target Local File Systems.",
+  "[  OK  ] Started Window Manager.",
+  "[  OK  ] Started Font Cache Service.",
+  "[  OK  ] Started Project Index Service.",
+  "[  OK  ] Reached target Graphical Interface.",
   "",
-  "All systems nominal.",
-  "Booting into desktop...",
+  "kez-portfolio v1.0 booting into desktop...",
 ];
 
 const TOTAL_DURATION = 3200;
@@ -98,7 +98,7 @@ export default function LoadingScreen() {
               />
             </div>
             <div className="mt-2 font-mono text-[10px] tracking-wider text-navy/40">
-              portfoliOS v1.0 — {Math.round(progress)}% LOADED
+              kez-portfolio v1.0 — {Math.round(progress)}% LOADED
             </div>
           </div>
         </div>

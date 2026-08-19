@@ -2,15 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { ABOUT, ABOUT_LINK_CLASS, type AboutParagraph } from "@/data/about";
-import { useWindowStore, type WindowId } from "@/store/useWindowStore";
+import { useWindowStore, type ExperiencesTab, type WindowId } from "@/store/useWindowStore";
 import Image from "next/image";
 
 export default function AboutContent() {
   const [asciiArt, setAsciiArt] = useState<string>("");
   const openWindow = useWindowStore((s) => s.openWindow);
   const focusWindow = useWindowStore((s) => s.focusWindow);
+  const setExperiencesTab = useWindowStore((s) => s.setExperiencesTab);
 
-  const handleOpen = (id: WindowId) => {
+  const handleOpen = (id: WindowId, experiencesTab?: ExperiencesTab) => {
+    if (id === "experiences" && experiencesTab) {
+      setExperiencesTab(experiencesTab);
+    }
     openWindow(id);
     focusWindow(id);
   };
@@ -77,7 +81,7 @@ export default function AboutContent() {
             <Link
               key={i}
               className={part.window.className}
-              onClick={() => handleOpen(part.window.windowId)}
+              onClick={() => handleOpen(part.window.windowId, part.window.experiencesTab)}
             >
               {part.window.label}
             </Link>
@@ -110,7 +114,7 @@ export default function AboutContent() {
           <p className="font-mono text-[11px] text-navy/50">{ABOUT.tagline}</p>
         </div>
 
-        <div className="pt-3 text-[13px] leading-relaxed text-navy/70 space-y-3">
+        <div className="pt-1 text-[13px] leading-relaxed text-navy/70 space-y-3">
           {ABOUT.paragraphs.map((paragraph, i) => (
             <div key={i}>{renderParagraph(paragraph)}</div>
           ))}
@@ -125,7 +129,7 @@ export default function AboutContent() {
             }}
           />
           <span className="relative z-10 bg-canvas pr-2 font-mono text-[10px] font-bold uppercase tracking-widest text-navy/40 select-none">
-            I also enjoy
+            In my spare time, I also enjoy
           </span>
           <div className="relative z-10 bg-canvas pl-2 flex items-center shrink-0">
             <a

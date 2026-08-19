@@ -1,12 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import blogData from "@/data/blog.json";
+import { useWindowStore } from "@/store/useWindowStore";
 
 export default function BlogContent() {
   const [selected, setSelected] = useState(0);
+  const setWindowTitle = useWindowStore((s) => s.setWindowTitle);
 
   const currentEntry = blogData[selected] || null;
+
+  useEffect(() => {
+    setWindowTitle("blog", currentEntry ? `${currentEntry.title}.md` : "Blog.md");
+  }, [currentEntry, setWindowTitle]);
 
   return (
     <div className="flex h-full flex-col sm:flex-row sm:gap-0">
@@ -38,9 +44,10 @@ export default function BlogContent() {
             <h3 className="mt-1 text-[14px] font-semibold tracking-tight sm:text-[15px]">
               {currentEntry.title}
             </h3>
-            <p className="mt-3 text-[12px] whitespace-pre-wrap leading-relaxed text-navy/60">
-              {currentEntry.body}
-            </p>
+            <div
+              className="blog-prose mt-3 text-[12px] leading-relaxed text-navy/60"
+              dangerouslySetInnerHTML={{ __html: currentEntry.body }}
+            />
           </>
         ) : (
           <div className="text-navy/50 text-[12px]">No blog posts found.</div>

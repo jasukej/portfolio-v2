@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import experiencesData from "@/data/experiences.json";
 import { EXPERIENCES_UI } from "@/data/experiences";
+import { useWindowStore } from "@/store/useWindowStore";
 
 export default function ExperiencesContent() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("All");
+  const activeTab = useWindowStore((s) => s.experiencesTab);
+  const setActiveTab = useWindowStore((s) => s.setExperiencesTab);
 
   const filteredResults = experiencesData.filter((exp) => {
     const matchesCategory =
@@ -23,7 +25,7 @@ export default function ExperiencesContent() {
   });
 
   return (
-    <div className="flex h-full flex-col bg-canvas p-4 sm:p-6 text-navy">
+    <div className="flex h-full flex-col bg-canvas py-3 px-2 sm:p-5 text-navy">
       <div className="mb-4 flex flex-col items-center border-b border-navy/20 pb-6 pt-2">
         <h1 className="mb-5 font-serif text-3xl font-bold tracking-tight sm:text-4xl italic">
           {EXPERIENCES_UI.titleMain}
@@ -92,7 +94,7 @@ export default function ExperiencesContent() {
                 )}
               </div>
 
-              <p className="mt-2 text-[12px] leading-relaxed opacity-90 sm:w-11/12">
+              <p className="mt-2 text-[12px] leading-relaxed opacity-90">
                 {exp.description}
               </p>
             </div>

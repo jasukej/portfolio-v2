@@ -4,10 +4,10 @@ export const WINDOW_DIMENSIONS: Record<
   WindowId,
   { width: number; height: number }
 > = {
-  about: { width: 735, height: 440 },
+  about: { width: 800, height: 460 },
   projects: { width: 600, height: 450 },
-  blog: { width: 540, height: 420 },
-  experiences: { width: 520, height: 420 },
+  blog: { width: 700, height: 800 },
+  experiences: { width: 600, height: 570 },
   music: { width: 340, height: 540 },
   contact: { width: 460, height: 320 },
   terminal: { width: 580, height: 350 },

@@ -1,12 +1,19 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { marked } from "marked";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const blogDir = path.join(__dirname, "../src/content/blog");
 const outPath = path.join(__dirname, "../src/data/blog.json");
+
+// Configure marked for clean output
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+});
 
 function generateBlog() {
   if (!fs.existsSync(blogDir)) {
@@ -23,7 +30,7 @@ function generateBlog() {
       if (!match) return null;
 
       const frontmatter = match[1];
-      const body = match[2].trim();
+      const rawBody = match[2].trim();
 
       const titleMatch = frontmatter.match(/title:\s+(.*)/);
       const dateMatch = frontmatter.match(/date:\s+(.*)/);
@@ -32,6 +39,9 @@ function generateBlog() {
         ? titleMatch[1].replace(/^["']|["']$/g, "")
         : "Untitled";
       const date = dateMatch ? dateMatch[1].trim() : "1970-01-01";
+
+      // Convert markdown to HTML at build time
+      const body = marked.parse(rawBody);
 
       return { title, date, body };
     })

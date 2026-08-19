@@ -2,8 +2,8 @@
  * Retro cursors from /public/cursor/
  */
 :root {
-  --cursor-default: url("/cursor/arrow.cur"), default;
-  --cursor-pointer: url("/cursor/Link%20Select.cur"), pointer;
+  --cursor-default: url("/cursor.svg") 5 3, default;
+  --cursor-pointer: url("/pointer.svg") 8 1, pointer;
   --cursor-text: url("/cursor/text.cur"), text;
   --cursor-move: url("/cursor/move1.cur"), move;
   --cursor-move-active: url("/cursor/move2.cur"), move;

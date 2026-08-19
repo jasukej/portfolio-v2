@@ -6,7 +6,7 @@
     "link": "https://buildyourfuture.withgoogle.com/",
     "tag": "work",
     "location": "New York City, NY",
-    "description": "Making it possible to ergonomically call C++ code from Rust and vice versa by building tools and libraries for the Crubit project.",
+    "description": "Enabling seamless C++ to/from Rust interop. Implemented a stable IR for the C++ to Rust direction and significantly optimized runtime RAM usage, unblocking open-source builds and tool use on large C++ libraries.",
     "date": "Jan 2026 - Present"
   },
   {
@@ -16,7 +16,7 @@
     "link": "https://www.tesla.com/en_ca/supercharger",
     "tag": "work",
     "location": "Palo Alto, CA",
-    "description": "Building distributed services in Scala and Akka to optimize uptime of a global charging network.",
+    "description": "Building distributed services in Scala and Akka to optimize uptime of a global charging network. Specific work under NDA.",
     "date": "Sept 2025 - Dec 2025"
   },
   {
@@ -62,7 +62,7 @@
     "link": "https://ubcpmc.com/",
     "tag": "organizations",
     "location": "Vancouver, BC",
-    "description": "Organized Canada's first student-led PM conference! Being really good at KBBQ. Also running UBC's first Product Fellowship. Previously Conference Director (2024-2025).",
+    "description": "Organized Canada's first student-led PM conference! This entails being really good at planning huge trips, listening to, and building connections with diverse individuals. Previously Conference Director (2024-2025), where I led Canada's first student-led PM conference.",
     "date": "May 2024 - Present"
   },
   {
@@ -71,7 +71,7 @@
     "link": "https://nwplus.io/",
     "tag": "organizations",
     "location": "Vancouver, BC",
-    "description": "Developing software tools for 1000+ hackers and 50+ organizers to run Western Canada's largest hackathons. Previously Engagement Coordinator (2024-2025).",
+    "description": "Developing software tools for 1000+ hackers and 50+ organizers to run Western Canada's largest hackathons. Previously Engagement Coordinator (2024-2025), where I made our hackathons more fun through creative events & initiatives.",
     "date": "May 2024 - Present"
   }
 ]

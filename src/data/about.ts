@@ -1,4 +1,4 @@
-import type { WindowId } from "@/store/useWindowStore";
+import type { ExperiencesTab, WindowId } from "@/store/useWindowStore";
 
 export type AboutTextPart = { text: string };
 
@@ -15,6 +15,7 @@ export type AboutWindowLink = {
   windowId: WindowId;
   label: string;
   className: typeof ABOUT_LINK_CLASS;
+  experiencesTab?: ExperiencesTab;
 };
 
 export type AboutParagraph =
@@ -28,7 +29,7 @@ export const ABOUT = {
   name: "Kez",
   fullName: "Roselina Kezia Rijadi",
   tagline: "Software Engineer & CS @ University of British Columbia",
-  currentlyDoing: ["Learning guitar", "Running", "Writing"],
+  currentlyDoing: ["Drawing", "Munching (add me on beli: @keziwezi)", "Writing"],
   links: {
     github: "https://github.com/jasukej",
     ubc: "https://www.ubc.ca/",
@@ -61,14 +62,25 @@ export const ABOUT = {
           },
         },
         {
-          text: ". A big part of what motivates me is bringing people together + hosting cool experiences.",
+          text: ". I like programming languages and operating systems, and generally, thinking up better abstractions. ",
+        },
+        {
+          window: {
+            windowId: "experiences",
+            label: "Community",
+            className: ABOUT_LINK_CLASS,
+            experiencesTab: "Organizations",
+          },
+        },
+        {
+          text: " has been a huge part of my story, and I extend that joy by hosting events for my university, my friends, and family.",
         },
       ],
     },
     {
       type: "rich",
       parts: [
-        { text: "I'm currently in NYC for the summer working on " },
+        { text: "Right now, I'm in NYC for the summer working on " },
         {
           window: {
             windowId: "experiences",
@@ -76,15 +88,15 @@ export const ABOUT = {
             className: ABOUT_LINK_CLASS,
           },
         },
-        { text: ". I enjoy " },
+        { text: " at Google. There are a lot of things to be excited about, and I write about some of them " },
         {
           window: {
             windowId: "blog",
-            label: "writing",
+            label: "here",
             className: ABOUT_LINK_CLASS,
           },
         },
-        { text: ", whether that be technical deep-dives or reflections." },
+        { text: "." },
       ],
     },
   ] satisfies AboutParagraph[],

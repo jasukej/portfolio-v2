@@ -3,6 +3,8 @@ import { getDefaultWindowPositions } from "@/lib/desktop-layout";
 
 export type WindowId = "about" | "terminal" | "blog" | "projects" | "contact" | "settings" | "experiences" | "music";
 
+export type ExperiencesTab = "All" | "Work" | "Part-Time" | "Organizations";
+
 export interface WindowState {
   id: WindowId;
   title: string;
@@ -17,6 +19,8 @@ interface WindowStore {
   nextZIndex: number;
   booted: boolean;
   theme: "dark" | "light";
+  experiencesTab: ExperiencesTab;
+  setExperiencesTab: (tab: ExperiencesTab) => void;
   setTheme: (theme: "dark" | "light") => void;
   setBoot: (booted: boolean) => void;
   openWindow: (id: WindowId) => void;
@@ -24,6 +28,7 @@ interface WindowStore {
   minimizeWindow: (id: WindowId) => void;
   focusWindow: (id: WindowId) => void;
   setWindowPosition: (id: WindowId, position: { x: number; y: number }) => void;
+  setWindowTitle: (id: WindowId, title: string) => void;
   getWindow: (id: WindowId) => WindowState | undefined;
   applyDesktopLayout: () => void;
 }
@@ -100,6 +105,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
   nextZIndex: 1,
   booted: false,
   theme: "light",
+  experiencesTab: "All",
+
+  setExperiencesTab: (tab) => set({ experiencesTab: tab }),
 
   setTheme: (theme) => {
     if (typeof window !== "undefined") {
@@ -162,6 +170,13 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
     set((state) => ({
       windows: state.windows.map((w) =>
         w.id === id ? { ...w, position } : w
+      ),
+    })),
+
+  setWindowTitle: (id, title) =>
+    set((state) => ({
+      windows: state.windows.map((w) =>
+        w.id === id ? { ...w, title } : w
       ),
     })),
 
