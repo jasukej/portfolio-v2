@@ -18,6 +18,9 @@ interface WindowFrameProps {
 }
 
 const MOBILE_QUERY = "(max-width: 639px)";
+const MENU_BAR_HEIGHT = 24;
+const TASKBAR_HEIGHT = 40;
+const MAXIMIZED_GAP = 10;
 
 function subscribeMobileQuery(onChange: () => void) {
   const mq = window.matchMedia(MOBILE_QUERY);
@@ -75,7 +78,7 @@ export default function WindowFrame({
     if (storeX !== 80 || storeY !== 60) return;
 
     const centerX = Math.max(0, (window.innerWidth - size.width) / 2);
-    const centerY = Math.max(0, (window.innerHeight - size.height) / 2);
+    const centerY = Math.max(MENU_BAR_HEIGHT, (window.innerHeight - size.height) / 2);
     const centered = { x: centerX, y: centerY };
 
     startTransition(() => {
@@ -109,7 +112,7 @@ export default function WindowFrame({
       const dx = moveEvent.clientX - startX;
       const dy = moveEvent.clientY - startY;
 
-      const nextY = Math.max(0, startPosY + dy);
+      const nextY = Math.max(MENU_BAR_HEIGHT, startPosY + dy);
       const nextX = startPosX + dx;
 
       setPos({ x: nextX, y: nextY });
@@ -120,7 +123,7 @@ export default function WindowFrame({
       document.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("pointerup", handlePointerUp);
 
-      const nextY = Math.max(0, startPosY + (upEvent.clientY - startY));
+      const nextY = Math.max(MENU_BAR_HEIGHT, startPosY + (upEvent.clientY - startY));
       const nextX = startPosX + (upEvent.clientX - startX);
       setWindowPosition(id, { x: nextX, y: nextY });
     };
@@ -167,7 +170,7 @@ export default function WindowFrame({
         const potentialHeight = startHeight - dy;
         if (potentialHeight >= minHeight) {
           newHeight = potentialHeight;
-          newY = Math.max(0, startPosY + dy);
+          newY = Math.max(MENU_BAR_HEIGHT, startPosY + dy);
         }
       }
 
@@ -194,7 +197,7 @@ export default function WindowFrame({
       if (dir.includes("n")) {
         const potentialHeight = startHeight - dy;
         if (potentialHeight >= minHeight) {
-          newY = Math.max(0, startPosY + dy);
+          newY = Math.max(MENU_BAR_HEIGHT, startPosY + dy);
         }
       }
 
@@ -214,9 +217,10 @@ export default function WindowFrame({
     } else {
       setPrevSize(size);
       setPrevPos(pos);
-      const newW = window.innerWidth - 20;
-      const newH = window.innerHeight - 60;
-      const maximizedPos = { x: 10, y: 10 };
+      const newW = window.innerWidth - MAXIMIZED_GAP * 2;
+      const newH =
+        window.innerHeight - MENU_BAR_HEIGHT - TASKBAR_HEIGHT - MAXIMIZED_GAP * 2;
+      const maximizedPos = { x: MAXIMIZED_GAP, y: MENU_BAR_HEIGHT + MAXIMIZED_GAP };
       setSize({ width: newW, height: newH });
       setPos(maximizedPos);
       setWindowPosition(id, maximizedPos);
