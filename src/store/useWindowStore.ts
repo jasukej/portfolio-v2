@@ -21,6 +21,9 @@ interface WindowStore {
   theme: "dark" | "light";
   experiencesTab: ExperiencesTab;
   setExperiencesTab: (tab: ExperiencesTab) => void;
+  /** Name of the project open in the projects window; null means the first one. */
+  selectedProject: string | null;
+  setSelectedProject: (name: string) => void;
   setTheme: (theme: "dark" | "light") => void;
   setBoot: (booted: boolean) => void;
   openWindow: (id: WindowId) => void;
@@ -108,6 +111,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
   experiencesTab: "All",
 
   setExperiencesTab: (tab) => set({ experiencesTab: tab }),
+
+  selectedProject: null,
+  setSelectedProject: (name) => set({ selectedProject: name }),
 
   setTheme: (theme) => {
     if (typeof window !== "undefined") {

@@ -2,13 +2,29 @@
 
 import { useEffect, useState } from "react";
 import blogData from "@/data/blog.json";
-import { useWindowStore } from "@/store/useWindowStore";
+import { useWindowStore, type WindowId } from "@/store/useWindowStore";
 
 export default function BlogContent() {
   const [selected, setSelected] = useState(0);
   const setWindowTitle = useWindowStore((s) => s.setWindowTitle);
+  const openWindow = useWindowStore((s) => s.openWindow);
+  const focusWindow = useWindowStore((s) => s.focusWindow);
+  const setSelectedProject = useWindowStore((s) => s.setSelectedProject);
 
   const currentEntry = blogData[selected] || null;
+
+  // Posts link to other windows with `[text](window:projects/<name>)`.
+  const handleProseClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const link = (e.target as HTMLElement).closest("a");
+    const href = link?.getAttribute("href");
+    if (!href?.startsWith("window:")) return;
+
+    e.preventDefault();
+    const [id, item] = href.slice("window:".length).split("/").map(decodeURIComponent);
+    if (id === "projects" && item) setSelectedProject(item);
+    openWindow(id as WindowId);
+    focusWindow(id as WindowId);
+  };
 
   useEffect(() => {
     setWindowTitle("blog", currentEntry ? `${currentEntry.title}.md` : "Blog.md");
@@ -46,6 +62,7 @@ export default function BlogContent() {
             </h3>
             <div
               className="blog-prose mt-6"
+              onClick={handleProseClick}
               dangerouslySetInnerHTML={{ __html: currentEntry.body }}
             />
           </article>

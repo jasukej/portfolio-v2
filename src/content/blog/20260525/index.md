@@ -39,7 +39,7 @@ Overall, you can imagine a build system as a tool that _updates_ your codebase, 
 - How does it discover the correct order to build these files? In the former example, it could not have built `main.exe` without having built `common.o`, and we cannot rely on the user to provide a correct ordering for a non-trivial chain of dependencies.
 - How does it know when to avoid re-building a clean file? Remember that we would like this for the sake of minimality.
 
-## ...
+## The Menu: Schedulers and Rebuilders
 
 These two choices lie primarily in distinct, but interconnected components:
 1. **Scheduler**: Orders tasks such that dependencies for any given task exist and are up-to-date before it itself is executed.
@@ -127,11 +127,9 @@ The rebuilder's job is to decide, for a single key, whether it is up-to-date, id
 
 ## Closing Thoughts
 
-Stripped down, every build system in this post answers the same two questions: in what order should tasks run, and which tasks can be skipped? The scheduler answers the first and the rebuilder answers the second. What I found most useful about the paper is that these two choices are mostly independent, so you can describe a build system by picking one of each, à la carte. Make is a topological scheduler with a dirty bit, Bazel is a restarting scheduler with constructive traces, and so on down the table. 
+Stripped down, every build system in this post answers the same two questions: in what order should tasks run, and which tasks can be skipped? The scheduler answers the first and the rebuilder answers the second. What I found most useful about the paper is that these two choices are mostly independent, so you can describe a build system by picking one of each, à la carte. Make is a topological scheduler with a dirty bit, Bazel is a restarting scheduler with constructive traces; and you can make your own custom-fit for your specific needs. For some practice, I wrote my own in Rust (which I un-inspiringly named [Bagel](window:projects/bagel)), which is a topological scheduler with verifying traces.
 
-[a short paragraph on a project I made for that re-implements a system]
-
-This also exposes combinations that have yet to be productionized. The paper fills one of these gaps itself with Cloud Shake, which pairs Shake's suspending scheduler with Bazel-style constructive traces. Since then, Buck2 and Pants v2 have landed in the same spot, which lines up with the trend towards dynamic dependencies and shared caches. Both cost memory and complexity, and large codebases seem happy to pay for them.
+This also exposes combinations that have yet to be productionized. The paper fills one of these gaps itself with Cloud Shake, which pairs Shake's suspending scheduler with Bazel-style constructive traces. Since then, Buck2 has landed in the same spot, which lines up with the trend towards dynamic dependencies and shared caches. As systems scale in complexity, hand-written dependency graphs drift from the code they describe. With a shared cache, a stale result is served to everyone, and hence it is worthwhile to automate dependency discovery with monadic tasks. It's interesting to see even static tools being pulled this way: Make users often have compilers emit a depfile (`gcc -MMD`) listing the headers it actually read, so the next build uses the discovered dependencies instead of Make's native . So, despite the memory and complexity incurred by dynamic dependencies, large codebases seem happy to pay for them in exchange for reliability.
 
 #### References
 

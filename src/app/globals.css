@@ -178,6 +178,41 @@ body {
   font-size: 0.88em;
 }
 
+/* Shiki tokens carry both themes as CSS vars; pick one per site theme. */
+.blog-prose .shiki,
+.blog-prose .shiki span {
+  color: var(--shiki-light);
+}
+
+.blog-prose pre.shiki {
+  background: var(--shiki-light-bg);
+}
+
+.dark .blog-prose .shiki,
+.dark .blog-prose .shiki span {
+  color: var(--shiki-dark);
+}
+
+.dark .blog-prose pre.shiki {
+  background: var(--shiki-dark-bg);
+}
+
+.blog-prose pre[data-lang] {
+  position: relative;
+  padding-top: 1.9em;
+}
+
+.blog-prose pre[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.45em;
+  right: 0.8em;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--prose-muted);
+}
+
 .blog-prose :not(pre) > code {
   padding: 0.1em 0.35em;
   background: var(--color-cream);

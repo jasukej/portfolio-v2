@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { marked } from "marked";
+import { bundledLanguages, createHighlighter } from "shiki";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,46 @@ const VIDEO_EXTENSIONS = new Set([".mp4", ".webm", ".mov"]);
 marked.setOptions({
   breaks: true,
   gfm: true,
+});
+
+/**
+ * Fenced code is highlighted at build time with Shiki. Both themes are emitted
+ * as CSS variables (--shiki-light / --shiki-dark) so globals.css can follow the
+ * site's `.dark` class; languages are loaded on demand from the fences found.
+ */
+const highlighter = await createHighlighter({
+  themes: ["github-light", "github-dark-default"],
+  langs: [],
+});
+
+async function loadFenceLanguages(markdown) {
+  const langs = new Set(
+    [...markdown.matchAll(/^[ \t]*```([\w+#-]+)/gm)].map((m) => m[1].toLowerCase())
+  );
+  for (const lang of langs) {
+    if (lang in bundledLanguages) await highlighter.loadLanguage(lang);
+  }
+}
+
+marked.use({
+  renderer: {
+    code({ text, lang }) {
+      const language = lang?.trim().split(/\s+/)[0].toLowerCase() ?? "";
+      const loaded = highlighter.getLoadedLanguages().includes(language);
+      return highlighter.codeToHtml(text, {
+        lang: loaded ? language : "text",
+        themes: { light: "github-light", dark: "github-dark-default" },
+        defaultColor: false,
+        transformers: [
+          {
+            pre(node) {
+              if (loaded) node.properties["data-lang"] = language;
+            },
+          },
+        ],
+      });
+    },
+  },
 });
 
 /**
@@ -188,16 +229,22 @@ function renderBody(rawBody, post) {
   return marked.parse(markdown) + renderFootnotes(definitions, order, post.slug);
 }
 
-function generateBlog() {
+async function generateBlog() {
   if (!fs.existsSync(blogDir)) {
     fs.mkdirSync(blogDir, { recursive: true });
   }
 
   fs.rmSync(mediaOutDir, { recursive: true, force: true });
 
-  const entries = findPosts()
+  const posts = findPosts().map((post) => ({
+    ...post,
+    content: fs.readFileSync(post.mdPath, "utf-8"),
+  }));
+  for (const { content } of posts) await loadFenceLanguages(content);
+
+  const entries = posts
     .map((post) => {
-      const content = fs.readFileSync(post.mdPath, "utf-8");
+      const { content } = post;
 
       const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
       if (!match) return null;
@@ -232,4 +279,4 @@ function generateBlog() {
   );
 }
 
-generateBlog();
+await generateBlog();

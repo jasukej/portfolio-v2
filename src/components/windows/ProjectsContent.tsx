@@ -10,24 +10,36 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { PROJECTS, type Project } from "@/data/projects";
+import { useWindowStore } from "@/store/useWindowStore";
 
 export default function ProjectsContent() {
-  const [selectedProject, setSelectedProject] = useState<Project>(PROJECTS[0]);
+  // Selection lives in the store so other windows (e.g. blog links) can pick a project.
+  const selectedName = useWindowStore((s) => s.selectedProject);
+  const setSelectedName = useWindowStore((s) => s.setSelectedProject);
+  const selectedProject =
+    PROJECTS.find((p) => p.name === selectedName) ?? PROJECTS[0];
+
   const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({
-    [PROJECTS[0].name]: true,
+    [selectedProject.name]: true,
   });
+
+  // Expand the folder of a project selected from outside this window.
+  const [prevSelected, setPrevSelected] = useState(selectedProject.name);
+  if (prevSelected !== selectedProject.name) {
+    setPrevSelected(selectedProject.name);
+    setOpenFolders((prev) => ({ ...prev, [selectedProject.name]: true }));
+  }
 
   const toggleFolder = (name: string, e: React.MouseEvent) => {
     e.stopPropagation();
     setOpenFolders((prev) => ({ ...prev, [name]: !prev[name] }));
-    const project = PROJECTS.find((p) => p.name === name);
-    if (!openFolders[name] && project) {
-      setSelectedProject(project);
+    if (!openFolders[name]) {
+      setSelectedName(name);
     }
   };
 
   const selectProject = (project: Project) => {
-    setSelectedProject(project);
+    setSelectedName(project.name);
     setOpenFolders((prev) => ({ ...prev, [project.name]: true }));
   };
 
