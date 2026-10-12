@@ -3,7 +3,9 @@ import { getDefaultWindowPositions } from "@/lib/desktop-layout";
 
 export type WindowId = "about" | "terminal" | "blog" | "projects" | "contact" | "settings" | "experiences" | "music";
 
-export type ExperiencesTab = "All" | "Work" | "Part-Time" | "Organizations";
+export type ExperiencesTab = "All" | "Work" | "Research" | "Part-Time" | "Organizations";
+
+export type DesktopPattern = "grid" | "platinum" | "classic";
 
 export interface WindowState {
   id: WindowId;
@@ -25,6 +27,8 @@ interface WindowStore {
   selectedProject: string | null;
   setSelectedProject: (name: string) => void;
   setTheme: (theme: "dark" | "light") => void;
+  desktopPattern: DesktopPattern;
+  setDesktopPattern: (pattern: DesktopPattern) => void;
   setBoot: (booted: boolean) => void;
   openWindow: (id: WindowId) => void;
   closeWindow: (id: WindowId) => void;
@@ -111,6 +115,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
   experiencesTab: "All",
 
   setExperiencesTab: (tab) => set({ experiencesTab: tab }),
+
+  desktopPattern: "grid",
+  setDesktopPattern: (pattern) => set({ desktopPattern: pattern }),
 
   selectedProject: null,
   setSelectedProject: (name) => set({ selectedProject: name }),
