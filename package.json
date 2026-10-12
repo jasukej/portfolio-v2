@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/generate-blog.mjs",
-    "prebuild": "node scripts/generate-blog.mjs",
-    "generate:blog": "node scripts/generate-blog.mjs",
+    "predev": "node scripts/generate-content.mjs",
+    "prebuild": "node scripts/generate-content.mjs",
+    "generate:content": "node scripts/generate-content.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

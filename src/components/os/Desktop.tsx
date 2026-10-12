@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useWindowStore, type WindowId } from "@/store/useWindowStore";
 import { WINDOW_DIMENSIONS } from "@/lib/desktop-layout";
+import { useSoundEffects } from "@/hooks/useSoundEffects";
 import { DESKTOP_ICONS_LEFT, DESKTOP_ICONS_RIGHT } from "@/data/desktop";
 import LoadingScreen from "./LoadingScreen";
 import Taskbar from "./Taskbar";
@@ -36,6 +37,8 @@ export default function Desktop() {
   const applyDesktopLayout = useWindowStore((s) => s.applyDesktopLayout);
   const desktopPattern = useWindowStore((s) => s.desktopPattern);
   const layoutAppliedRef = useRef(false);
+
+  useSoundEffects(booted);
 
   useEffect(() => {
     if (!booted || layoutAppliedRef.current) return;

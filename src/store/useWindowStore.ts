@@ -29,6 +29,8 @@ interface WindowStore {
   setTheme: (theme: "dark" | "light") => void;
   desktopPattern: DesktopPattern;
   setDesktopPattern: (pattern: DesktopPattern) => void;
+  soundEffects: boolean;
+  setSoundEffects: (on: boolean) => void;
   setBoot: (booted: boolean) => void;
   openWindow: (id: WindowId) => void;
   closeWindow: (id: WindowId) => void;
@@ -38,6 +40,17 @@ interface WindowStore {
   setWindowTitle: (id: WindowId, title: string) => void;
   getWindow: (id: WindowId) => WindowState | undefined;
   applyDesktopLayout: () => void;
+}
+
+const SOUND_EFFECTS_KEY = "sound-effects";
+
+// Remembered across visits so a muted visitor doesn't hear the startup chime again.
+function readSoundEffects() {
+  try {
+    return localStorage.getItem(SOUND_EFFECTS_KEY) !== "off";
+  } catch {
+    return true;
+  }
 }
 
 const initialWindows: WindowState[] = [
@@ -118,6 +131,14 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
 
   desktopPattern: "grid",
   setDesktopPattern: (pattern) => set({ desktopPattern: pattern }),
+
+  soundEffects: readSoundEffects(),
+  setSoundEffects: (on) => {
+    try {
+      localStorage.setItem(SOUND_EFFECTS_KEY, on ? "on" : "off");
+    } catch {}
+    set({ soundEffects: on });
+  },
 
   selectedProject: null,
   setSelectedProject: (name) => set({ selectedProject: name }),

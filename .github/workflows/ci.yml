@@ -17,5 +17,5 @@ jobs:
           cache: "npm"
 
       - run: npm ci
-      - run: npm run generate:blog
+      - run: npm run generate:content
       - run: npm run check

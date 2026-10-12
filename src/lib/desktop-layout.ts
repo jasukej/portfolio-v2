@@ -11,7 +11,7 @@ export const WINDOW_DIMENSIONS: Record<
   music: { width: 340, height: 540 },
   contact: { width: 460, height: 320 },
   terminal: { width: 580, height: 350 },
-  settings: { width: 320, height: 360 },
+  settings: { width: 320, height: 450 },
 };
 
 export function getDefaultWindowPositions(): Partial<
