@@ -1,7 +1,7 @@
 # Portfolio
 V2 updated as of May 2026. Inspired by analog themes and the 1999 Macintosh design.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This portfolio is largely vibe-coded, although it is based on a (Figma) design and heavily takes from the 1998 Macintosh OS 8.1 interface. As such, the actual code leaves much to be desired.
 
 ## Getting Started
 

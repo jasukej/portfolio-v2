@@ -35,20 +35,20 @@ export default function BlogContent() {
         ))}
       </div>
 
-      <div className="flex-1 overflow-auto p-3 sm:p-4">
+      <div className="flex-1 overflow-auto px-4 py-5 sm:px-8 sm:py-8">
         {currentEntry ? (
-          <>
-            <div className="font-mono text-[10px] text-navy/30">
+          <article className="mx-auto w-full max-w-[640px] pb-12">
+            <div className="font-mono text-[11px] text-navy/50">
               {currentEntry.date}
             </div>
-            <h3 className="mt-1 text-[14px] font-semibold tracking-tight sm:text-[15px]">
+            <h3 className="mt-1.5 text-[18px] font-bold leading-snug tracking-tight sm:text-[20px]">
               {currentEntry.title}
             </h3>
             <div
-              className="blog-prose mt-3 text-[12px] leading-relaxed text-navy/60"
+              className="blog-prose mt-6"
               dangerouslySetInnerHTML={{ __html: currentEntry.body }}
             />
-          </>
+          </article>
         ) : (
           <div className="text-navy/50 text-[12px]">No blog posts found.</div>
         )}
