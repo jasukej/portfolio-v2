@@ -15,8 +15,8 @@ export type TerminalFileSystemNode =
   | { [key: string]: TerminalFileSystemNode };
 
 export const TERMINAL_WELCOME = [
-  "portfoliOS Terminal v1.0",
-  "Welcome. Type 'help' to see available commands.",
+  "Terminal v1.0",
+  "Type 'help' to see available commands.",
   "",
 ] as const;
 
@@ -85,14 +85,13 @@ export function buildTerminalFileSystem(
           "about.txt": [
             ABOUT.fullName,
             ABOUT.tagline,
-            "Building thoughtful, well-crafted software.",
+            "I like art, and building stuff :)",
           ],
           "skills.md": [
-            "## Technical Proficiencies",
-            "- Languages:  TypeScript, Python, Rust, Go",
-            "- Frontend:   React, Next.js, Tailwind, Framer Motion",
-            "- Backend:    Node.js, PostgreSQL, Redis",
-            "- Tools:      Git, Docker, Figma, Linux",
+            "## Technical Skills",
+            "- Languages:   Python, Rust, Typescript, C++, Java, Scala, C",
+            "- Frameworks:  React, PyTorch, NumPy, Flask, Node.js, Express, Rails, Angular, Pandas",
+            "- Tools:       Redis, PostgreSQL, Kafka, Git, Kubernetes, Docker, Cloud Platforms (AWS), Protobufs, Build Systems, Linux",
           ],
           "links.json": contactLinksJson(),
           "About.lnk": ["Shortcut to /home/guest/Applications/About.app"],
@@ -109,7 +108,7 @@ export function buildTerminalFileSystem(
         Projects: buildProjectsDir(),
         Documents: buildDocumentsDir(blogEntries),
         Pictures: {
-          "README.txt": ["Nothing to see here yet..."],
+          "README.txt": ["Nothing to see here yet."],
         },
       },
     },

@@ -19,6 +19,7 @@ export function getDefaultWindowPositions(): Partial<
 > {
   const exp = WINDOW_DIMENSIONS.experiences;
   const music = WINDOW_DIMENSIONS.music;
+  const terminal = WINDOW_DIMENSIONS.terminal;
 
   if (typeof window === "undefined") {
     return {
@@ -33,10 +34,18 @@ export function getDefaultWindowPositions(): Partial<
   const sidebar = viewportW < 640 ? 16 : 100;
   const top = 48;
   const gap = 12;
+  const taskbarHeight = 40;
 
   const experiencesX = sidebar + gap;
   const projectsX = experiencesX + exp.width + gap;
-  const terminalY = top + exp.height + gap;
+  // Sit below experiences, but lift it to stay clear of the taskbar on short screens.
+  const terminalY = Math.max(
+    top,
+    Math.min(
+      top + exp.height + gap,
+      window.innerHeight - terminal.height - taskbarHeight - gap
+    )
+  );
   const musicX = Math.max(projectsX, viewportW - music.width - 32);
 
   return {

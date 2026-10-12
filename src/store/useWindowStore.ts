@@ -105,7 +105,7 @@ const initialWindows: WindowState[] = [
 
 export const useWindowStore = create<WindowStore>((set, get) => ({
   windows: initialWindows,
-  nextZIndex: 1,
+  nextZIndex: Math.max(...initialWindows.map((w) => w.zIndex)) + 1,
   booted: false,
   theme: "light",
   experiencesTab: "All",
