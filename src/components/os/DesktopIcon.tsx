@@ -46,7 +46,7 @@ export default function DesktopIcon({ id, label }: DesktopIconProps) {
           style={{ filter: "var(--icon-invert)" }}
         />
       </div>
-      <span className="text-[10px] font-medium leading-tight text-navy/70 group-hover:text-navy sm:text-xs">
+      <span className="bg-canvas px-1 text-[10px] font-medium leading-tight text-navy/70 group-hover:text-navy sm:text-xs">
         {label}
       </span>
     </button>

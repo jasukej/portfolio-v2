@@ -49,6 +49,35 @@ body {
   touch-action: manipulation;
 }
 
+/* ── Desktop patterns ──────────────────────────────────────
+ * 1px checkerboard dithers, like the classic Mac desktop.
+ * "classic" is the System 7 / Mac OS 8 gray; "platinum" is a lighter take
+ * that keeps the texture visible without crowding the windows. */
+.desktop-pattern-classic {
+  --dither-dark: #8c8c8c;
+  --dither-light: #b4b4b4;
+}
+
+.desktop-pattern-platinum {
+  --dither-dark: #adadad;
+  --dither-light: #d4d4d4;
+}
+
+.dark .desktop-pattern-classic {
+  --dither-dark: #1c1c1c;
+  --dither-light: #444444;
+}
+
+.dark .desktop-pattern-platinum {
+  --dither-dark: #141417;
+  --dither-light: #2a2a2f;
+}
+
+.desktop-pattern-classic,
+.desktop-pattern-platinum {
+  background: repeating-conic-gradient(var(--dither-dark) 0 25%, var(--dither-light) 0 50%) 0 0 / 2px 2px;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
