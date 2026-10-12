@@ -1,11 +1,19 @@
 "use client";
 
-import { useWindowStore } from "@/store/useWindowStore";
+import { useWindowStore, type DesktopPattern } from "@/store/useWindowStore";
 import { Moon, Sun } from "lucide-react";
+
+const DESKTOP_PATTERNS: { id: DesktopPattern; label: string }[] = [
+  { id: "grid", label: "Grid" },
+  { id: "platinum", label: "Platinum" },
+  { id: "classic", label: "Classic" },
+];
 
 export default function SettingsContent() {
   const theme = useWindowStore((s) => s.theme);
   const setTheme = useWindowStore((s) => s.setTheme);
+  const desktopPattern = useWindowStore((s) => s.desktopPattern);
+  const setDesktopPattern = useWindowStore((s) => s.setDesktopPattern);
 
   return (
     <div className="flex flex-col h-full bg-canvas text-navy">
@@ -43,6 +51,28 @@ export default function SettingsContent() {
             <Moon size={16} />
             Dark
           </button>
+        </div>
+
+        <h3 className="mt-6 mb-2 font-mono text-xs uppercase tracking-wider text-navy/70">
+          Desktop Pattern
+        </h3>
+        <div className="grid grid-cols-3 gap-2">
+          {DESKTOP_PATTERNS.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => setDesktopPattern(id)}
+              className={`flex flex-col items-center gap-1.5 border-2 p-1.5 text-[11px] font-bold uppercase tracking-wider ${
+                desktopPattern === id
+                  ? "border-navy bg-navy text-canvas"
+                  : "border-navy/30 text-navy hover:border-navy"
+              }`}
+            >
+              <span
+                className={`block h-10 w-full border border-navy bg-canvas desktop-pattern-${id}`}
+              />
+              {label}
+            </button>
+          ))}
         </div>
       </div>
     </div>

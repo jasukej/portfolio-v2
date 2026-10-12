@@ -1,5 +1,16 @@
 [
   {
+    "title": "Undergraduate Research Assistant",
+    "org": "UBC SPL",
+    "team": "vBPF Project",
+    "link": "https://spl.cs.ubc.ca/",
+    "tag": "research",
+    "location": "Vancouver, BC",
+    "description": "Evaluating a verified semantics of the eBPF verifier.",
+    "writeup": "vbpf",
+    "date": "Aug 2026 - Present"
+  },
+  {
     "title": "Software Engineer Intern",
     "org": "Google",
     "team": "Crubit (Rust-C++ Interop)",
@@ -7,7 +18,16 @@
     "tag": "work",
     "location": "New York City, NY",
     "description": "Enabling seamless C++ to/from Rust interop. Implemented a stable IR for the C++ to Rust direction and significantly optimized runtime RAM usage, unblocking open-source builds and tool use on large C++ libraries.",
-    "date": "Jan 2026 - Present"
+    "date": "May 2026 - Aug 2026"
+  },
+  {
+    "title": "Teaching Assistant",
+    "org": "The University of British Columbia",
+    "link": "https://www.cs.ubc.ca/",
+    "tag": "part-time",
+    "location": "Vancouver, BC",
+    "description": "Teaching assistant for: \n + CPSC 210 (2024W1) - Software Construction \n + CPSC 313 (2026W1) - Computer Architecture",
+    "date": "Sep 2024 - Dec 2024"
   },
   {
     "title": "Software Engineer Intern",
@@ -45,16 +65,7 @@
     "tag": "part-time",
     "location": "Vancouver, BC",
     "description": "Troubleshooting and supporting UBC's research platforms (REDCap) and high-performance computing cluster, managing 200+ researchers and 300+ jobs.",
-    "date": "Sep 2024 - Present"
-  },
-  {
-    "title": "Teaching Assistant",
-    "org": "The University of British Columbia",
-    "link": "https://www.cs.ubc.ca/",
-    "tag": "part-time",
-    "location": "Vancouver, BC",
-    "description": "Teaching assistant for UBC's CPSC 210 - Software Construction course. Reinforcing Java and OOP concepts through weekly office hours and facilitating labs for 80+ students.",
-    "date": "Sep 2024 - Dec 2024"
+    "date": "Sep 2024 - Apr 2025"
   },
   {
     "title": "VP Community",
@@ -63,7 +74,7 @@
     "tag": "organizations",
     "location": "Vancouver, BC",
     "description": "Organized Canada's first student-led PM conference! This entails being really good at planning huge trips, listening to, and building connections with diverse individuals. Previously Conference Director (2024-2025), where I led Canada's first student-led PM conference.",
-    "date": "May 2024 - Present"
+    "date": "May 2024 - Apr 2026"
   },
   {
     "title": "Developer",
@@ -72,6 +83,6 @@
     "tag": "organizations",
     "location": "Vancouver, BC",
     "description": "Developing software tools for 1000+ hackers and 50+ organizers to run Western Canada's largest hackathons. Previously Engagement Coordinator (2024-2025), where I made our hackathons more fun through creative events & initiatives.",
-    "date": "May 2024 - Present"
+    "date": "May 2024 - Apr 2026"
   }
 ]

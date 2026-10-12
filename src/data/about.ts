@@ -80,7 +80,7 @@ export const ABOUT = {
     {
       type: "rich",
       parts: [
-        { text: "Most recently, I worked on " },
+        { text: "Over the summer, I worked on " },
         {
           window: {
             windowId: "experiences",
@@ -88,7 +88,7 @@ export const ABOUT = {
             className: ABOUT_LINK_CLASS,
           },
         },
-        { text: " at Google over the summer. Currently, I'm doing research on evaluating a verified semantics of the eBPF verifier as part of UBC SPL. I'm excited about a lot of things, and I write about some of them " },
+        { text: " at Google. Currently, I'm doing research on evaluating a verified semantics of the eBPF verifier, as part of my directed studies. I'm excited about a lot of things, and I write about some of them " },
         {
           window: {
             windowId: "blog",
