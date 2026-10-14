@@ -32,6 +32,13 @@ const COLLECTIONS = [
     output: (entries) =>
       Object.fromEntries(entries.map(({ slug, title, body }) => [slug, { title, body }])),
   },
+  {
+    name: "projects",
+    outFile: "project-writeups.json",
+    // Keyed by folder name, which a projects.json entry names as its `writeup`.
+    output: (entries) =>
+      Object.fromEntries(entries.map(({ slug, title, body }) => [slug, { title, body }])),
+  },
 ];
 
 const VIDEO_EXTENSIONS = new Set([".mp4", ".webm", ".mov"]);

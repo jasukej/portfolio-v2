@@ -9,8 +9,9 @@ import {
   ChevronRight,
   ChevronDown,
 } from "lucide-react";
-import { PROJECTS, type Project } from "@/data/projects";
+import { PROJECTS, PROJECT_WRITEUPS, type Project } from "@/data/projects";
 import { useWindowStore } from "@/store/useWindowStore";
+import Prose from "@/components/Prose";
 
 export default function ProjectsContent() {
   // Selection lives in the store so other windows (e.g. blog links) can pick a project.
@@ -18,6 +19,9 @@ export default function ProjectsContent() {
   const setSelectedName = useWindowStore((s) => s.setSelectedProject);
   const selectedProject =
     PROJECTS.find((p) => p.name === selectedName) ?? PROJECTS[0];
+  const writeup = selectedProject.writeup
+    ? PROJECT_WRITEUPS[selectedProject.writeup]
+    : undefined;
 
   const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({
     [selectedProject.name]: true,
@@ -133,6 +137,13 @@ export default function ProjectsContent() {
             <p className="text-navy leading-relaxed mb-6 text-sm">
               {selectedProject.description}
             </p>
+
+            {writeup && (
+              <div className="mb-6 border-t border-dashed border-navy/30 pt-6">
+                <h2 className="mb-4 text-[16px] font-bold leading-snug">{writeup.title}</h2>
+                <Prose html={writeup.body} />
+              </div>
+            )}
 
             {selectedProject.tags.length > 0 && (
               <div className="mb-6 mt-10">

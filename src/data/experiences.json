@@ -18,6 +18,7 @@
     "tag": "work",
     "location": "New York City, NY",
     "description": "Enabling seamless C++ to/from Rust interop. Implemented a stable IR for the C++ to Rust direction and significantly optimized runtime RAM usage, unblocking open-source builds and tool use on large C++ libraries.",
+    "writeup": "google-2026",
     "date": "May 2026 - Aug 2026"
   },
   {
@@ -73,7 +74,7 @@
     "link": "https://ubcpmc.com/",
     "tag": "organizations",
     "location": "Vancouver, BC",
-    "description": "Organized Canada's first student-led PM conference! This entails being really good at planning huge trips, listening to, and building connections with diverse individuals. Previously Conference Director (2024-2025), where I led Canada's first student-led PM conference.",
+    "description": "Soft-retired and became really good at planning big trips. Previously Conference Director (2024-2025), where I led Canada's first student-led PM conference.",
     "date": "May 2024 - Apr 2026"
   },
   {
